@@ -69,7 +69,7 @@ namespace StringCalculator.Tests
         }
 
         [TestMethod]
-        public void BackSlaschNStrings()
+        public void BackSlashNStrings()
         {
             // Arrange
             var calc = new StringCalculator();
@@ -77,8 +77,62 @@ namespace StringCalculator.Tests
             // Act
             var result = calc.Add("1\n2,3");
 
-            // Asset
+            // Assert
             Assert.AreEqual(6, result);
+        }
+
+        [TestMethod]
+        public void MultipleDelimitersStrings()
+        {
+            // Arrange
+            var calc = new StringCalculator();
+
+            // Act
+            var result = calc.Add(";\n1;2");
+
+            // Assert
+            Assert.AreEqual(3, result);
+        }
+
+        [TestMethod]
+        public void NegativeStrings()
+        {
+            // Arrange
+            var calc = new StringCalculator();
+
+            // Act and Assert
+            var ex = Assert.ThrowsException<InvalidOperationException>(() => calc.Add("-1,3,-2"));
+
+            // Assert
+            Assert.AreEqual("Negatives not allowed: -1, -2", ex.Message);
+        }
+
+        [TestMethod]
+        public void IgnoreNumberStrings()
+        {
+            // Arrange
+            var calc = new StringCalculator();
+
+            // Act
+            var result = calc.Add("2, 1001");
+
+            // Assert
+            Assert.AreEqual(2, result);
+        }
+
+        [TestMethod]
+        public void CalledCount_MethodeAdd()
+        {
+            // Arrange
+            var calc = new StringCalculator();
+
+            // Act
+            calc.Add("1,2,3");
+            calc.Add("4,5,6");
+            calc.Add("4,5,6");
+
+            // Assert
+            Assert.AreEqual(3, calc.CalledCount);
         }
     }
 }
