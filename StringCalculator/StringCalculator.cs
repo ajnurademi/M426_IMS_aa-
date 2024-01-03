@@ -45,7 +45,7 @@ namespace StringCalculator.Tests
             {
                 customDelimiters = defaultDelimiters;
 
-                //  kein '\n' v
+                //  kein '\n' 
                 indexOfNewLine = 0;
             }
 
