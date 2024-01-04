@@ -74,6 +74,7 @@ namespace StringCalculator.Tests
 
             if (negativeList.Count > 0)
             {
+                // Alle Elemente mit (,) trennen
                 throw new InvalidOperationException($"Negatives not allowed: {string.Join(", ", negativeList)}");
             }
             else
